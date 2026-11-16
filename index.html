@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tambal Ban – Cepat, Dekat, Praktis</title>
+<style>
+:root{--bg:#eef2ff;--surface:#fff;--ink:#14213d;--muted:#64708a;--brand:#1f3fbf;--brand2:#3b5bdb;--soft:#e3e9ff;--line:#e2e7f5;--ok:#d3f5de;--okink:#1d7a41;--shadow:0 6px 18px rgba(31,63,191,.12);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1226;--surface:#18203a;--ink:#eef1ff;--muted:#9aa5c6;--brand:#4c6ef5;--brand2:#5c7cfa;--soft:#232e55;--line:#2a345c;--ok:#16452c;--okink:#8ae0a8;--shadow:0 6px 18px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{--bg:#0d1226;--surface:#18203a;--ink:#eef1ff;--muted:#9aa5c6;--brand:#4c6ef5;--brand2:#5c7cfa;--soft:#232e55;--line:#2a345c;--ok:#16452c;--okink:#8ae0a8;--shadow:0 6px 18px rgba(0,0,0,.35)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:430px;min-height:100vh;background:var(--bg);position:relative;overflow-x:hidden}
+.screen{display:none;padding:18px 18px 96px;min-height:100vh}
+.screen.on{display:block}
+button{font:inherit;cursor:pointer;border:0;color:inherit}
+button:focus-visible{outline:3px solid var(--brand2);outline-offset:2px}
+h1,h2,h3,p{margin:0}
+.btn{width:100%;background:var(--brand);color:#fff;font-weight:700;padding:15px;border-radius:14px;font-size:16px;box-shadow:var(--shadow)}
+.card{background:var(--surface);border-radius:18px;box-shadow:var(--shadow);padding:12px}
+/* splash */
+#s-mulai{display:none;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding-top:48px;background:radial-gradient(circle at 85% 8%,var(--soft),transparent 45%)}
+#s-mulai.on{display:flex}
+.logo{width:110px;height:110px}
+.title{font-size:44px;font-weight:800;color:var(--brand);letter-spacing:-1px;margin-top:6px}
+.tag{color:var(--muted);font-weight:600;margin-top:2px}
+.hero{width:240px;height:240px;margin:18px 0}
+/* home */
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.loc small{display:block;color:var(--muted);font-size:12px}
+.loc b{font-size:15px}
+.bell{background:var(--surface);width:40px;height:40px;border-radius:50%;box-shadow:var(--shadow);font-size:18px}
+.banner{background:linear-gradient(120deg,var(--brand),var(--brand2));color:#fff;border-radius:20px;padding:20px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.banner h2{font-size:22px;max-width:70%}
+.banner p{margin-top:6px;font-size:13px;opacity:.9;max-width:60%}
+.banner .wheel{position:absolute;right:-26px;bottom:-34px;width:130px;height:130px;opacity:.9}
+.sec{display:flex;justify-content:space-between;align-items:baseline;margin:22px 0 10px}
+.sec h3{font-size:17px}
+.sec a{color:var(--brand);font-size:13px;font-weight:700;text-decoration:none}
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.svc button,.opt{background:var(--surface);border-radius:16px;padding:12px 4px;box-shadow:var(--shadow);font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px;border:2px solid transparent}
+.svc i,.opt i{font-style:normal;font-size:26px}
+.opt.sel{border-color:var(--brand);background:var(--soft)}
+.tukang{display:flex;gap:12px;align-items:center}
+.ava{width:60px;height:60px;border-radius:14px;background:linear-gradient(135deg,var(--brand2),var(--brand));display:grid;place-items:center;font-size:28px;flex:none}
+.tukang b{display:block}
+.tukang span{font-size:13px;color:var(--muted)}
+.chip{margin-left:auto;background:var(--ok);color:var(--okink);font-size:11px;font-weight:700;padding:5px 10px;border-radius:99px}
+/* nav */
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(--surface);display:none;justify-content:space-around;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);z-index:5}
+nav.on{display:flex}
+nav button{background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--muted);padding:4px 14px;font-weight:600}
+nav button span{font-size:20px}
+nav button.act{color:var(--brand)}
+/* map */
+.bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.bar h2{font-size:17px}
+.ib{background:var(--surface);width:38px;height:38px;border-radius:12px;box-shadow:var(--shadow);font-size:17px}
+.map{border-radius:20px;overflow:hidden;box-shadow:var(--shadow);height:380px;background:#dfe8f5}
+.map svg{width:100%;height:100%;display:block}
+.pin{cursor:pointer}
+.sheet{margin-top:14px}
+.sheet .tukang{margin-bottom:12px}
+/* order */
+.label{font-weight:700;margin:18px 0 8px;font-size:15px}
+.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.field{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:14px;padding:14px;box-shadow:var(--shadow);font-size:14px}
+.pay{display:flex;align-items:center;gap:10px;width:100%;background:var(--surface);padding:14px;border-radius:14px;box-shadow:var(--shadow);margin-bottom:8px;font-size:14px;text-align:left;border:2px solid transparent}
+.pay.sel{border-color:var(--brand)}
+.pay .r{margin-left:auto;width:18px;height:18px;border-radius:50%;border:2px solid var(--muted)}
+.pay.sel .r{border:5px solid var(--brand)}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:9;max-width:90%;text-align:center}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div class="app">
+
+<section class="screen" id="s-mulai">
+  <div>
+    <svg class="logo" viewBox="0 0 100 100" aria-hidden="true"><circle cx="54" cy="50" r="34" fill="#1f3fbf"/><circle cx="54" cy="50" r="20" fill="#fff"/><path d="M44 62l20-20" stroke="#1f3fbf" stroke-width="7" stroke-linecap="round"/><circle cx="66" cy="38" r="7" fill="none" stroke="#1f3fbf" stroke-width="5"/><path d="M6 36h22M2 50h22M8 64h18" stroke="#1f3fbf" stroke-width="5" stroke-linecap="round"/></svg>
+    <h1 class="title">Tambal Ban</h1>
+    <p class="tag">Cepat • Dekat • Praktis</p>
+  </div>
+  <svg class="hero" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="110" r="78" fill="#2a2f3a"/><circle cx="100" cy="110" r="58" fill="#cfd5e3"/><circle cx="100" cy="110" r="38" fill="#8d97b0"/><circle cx="100" cy="110" r="10" fill="#2a2f3a"/><g stroke="#2a2f3a" stroke-width="5"><path d="M100 72v76M62 110h76M73 83l54 54M127 83l-54 54"/></g><circle cx="160" cy="48" r="22" fill="#1f3fbf"/><rect x="146" y="64" width="28" height="40" rx="10" fill="#1f3fbf"/><path d="M138 44h44" stroke="#1f3fbf" stroke-width="8" stroke-linecap="round"/></svg>
+  <button class="btn" data-go="beranda">Mulai sekarang</button>
+</section>
+
+<section class="screen" id="s-beranda">
+  <div class="top">
+    <div class="loc"><small>Lokasi Anda</small><b>📍 Jl. Melati No.12 ⌄</b></div>
+    <button class="bell" aria-label="Notifikasi" data-toast="Belum ada notifikasi baru">🔔</button>
+  </div>
+  <div class="banner">
+    <h2>Butuh tambal ban?</h2>
+    <p>Pesan sekarang, kami siap membantu!</p>
+    <svg class="wheel" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#0b1a5c"/><circle cx="50" cy="50" r="26" fill="#2c3f9e"/><circle cx="50" cy="50" r="7" fill="#0b1a5c"/></svg>
+  </div>
+  <div class="sec"><h3>Layanan kami</h3></div>
+  <div class="svc">
+    <button data-svc="0"><i>🛞</i>Tambal Ban</button>
+    <button data-svc="1"><i>🔄</i>Ganti Ban</button>
+    <button data-svc="2"><i>💨</i>Isi Angin</button>
+    <button data-svc="3"><i>🔧</i>Servis Ban</button>
+  </div>
+  <div class="sec"><h3>Tukang terdekat</h3><a href="#peta">Lihat semua</a></div>
+  <div class="card tukang"><div class="ava">👷</div><div><b>Budi Tambal Ban</b><span>⭐ 4,8 (1,2rb ulasan)</span><br><span>📍 ±1,1 km</span></div><span class="chip">Siap datang</span></div>
+</section>
+
+<section class="screen" id="s-peta">
+  <div class="bar"><button class="ib" data-go="beranda" aria-label="Kembali">←</button><h2>Peta lokasi</h2><button class="ib" aria-label="Filter" data-toast="Filter belum tersedia">☰</button></div>
+  <div class="map">
+    <svg viewBox="0 0 380 380" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Peta lokasi tukang tambal ban terdekat">
+      <rect width="380" height="380" fill="#e6ecf6"/>
+      <rect x="20" y="60" width="90" height="70" rx="8" fill="#cfe5c8"/><rect x="260" y="220" width="100" height="90" rx="8" fill="#cfe5c8"/>
+      <path d="M0 200C80 180 140 240 230 200S340 120 380 150" stroke="#b9d2ee" stroke-width="26" fill="none"/>
+      <g stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round"><path d="M0 100h380M0 290h380M120 0v380M280 0v380"/><path d="M0 20L380 330" stroke-width="6"/></g>
+      <circle cx="190" cy="195" r="42" fill="#3b5bdb" opacity=".2"/><circle cx="190" cy="195" r="10" fill="#1f3fbf" stroke="#fff" stroke-width="4"/>
+      <g class="pin" data-toast="Budi Tambal Ban dipilih"><path d="M70 90a20 20 0 1 1 1 0l-.5 22z" fill="#1f3fbf"/><circle cx="70" cy="70" r="9" fill="#fff"/></g>
+      <g class="pin" data-toast="Bengkel Maju Jaya dipilih"><path d="M300 80a20 20 0 1 1 1 0l-.5 22z" fill="#1f3fbf"/><circle cx="300" cy="60" r="9" fill="#fff"/></g>
+      <g class="pin" data-toast="Tambal Ban Pak Joko dipilih"><path d="M110 300a20 20 0 1 1 1 0l-.5 22z" fill="#1f3fbf"/><circle cx="110" cy="280" r="9" fill="#fff"/></g>
+      <g class="pin" data-toast="Ban Express dipilih"><path d="M320 270a20 20 0 1 1 1 0l-.5 22z" fill="#1f3fbf"/><circle cx="320" cy="250" r="9" fill="#fff"/></g>
+    </svg>
+  </div>
+  <div class="card sheet"><div class="tukang"><div class="ava">👷</div><div><b>Budi Tambal Ban</b><span>⭐ 4,8 (1,2rb ulasan)</span><br><span>📍 ±1,1 km</span></div></div><button class="btn" data-go="pesan">Pesan sekarang</button></div>
+</section>
+
+<section class="screen" id="s-pesan">
+  <div class="bar"><button class="ib" data-go="peta" aria-label="Kembali">←</button><h2>Pesan layanan</h2><span style="width:38px"></span></div>
+  <div class="card tukang"><div class="ava">👷</div><div><b>Budi Tambal Ban</b><span>⭐ 4,8 (1,2rb ulasan)</span><br><span>📍 ±1,1 km</span></div></div>
+  <div class="label">Jenis layanan</div>
+  <div class="row4" id="opts">
+    <button class="opt sel"><i>🛞</i>Tambal Ban</button><button class="opt"><i>🔄</i>Ganti Ban</button><button class="opt"><i>💨</i>Isi Angin</button><button class="opt"><i>🔧</i>Servis Ban</button>
+  </div>
+  <div class="label">Alamat Anda</div>
+  <div class="field">📍 <span>Jl. Melati No.12</span><span style="margin-left:auto">›</span></div>
+  <div class="label">Metode pembayaran</div>
+  <div id="pays">
+    <button class="pay sel">💵 Tunai<span class="r"></span></button>
+    <button class="pay">📱 DANA / OVO / GoPay<span class="r"></span></button>
+  </div>
+  <button class="btn" id="order" style="margin-top:12px">Pesan sekarang</button>
+</section>
+
+<nav id="nav">
+  <button data-go="beranda"><span>🏠</span>Beranda</button>
+  <button data-go="peta"><span>📍</span>Peta</button>
+  <button data-toast="Belum ada pesanan"><span>🕒</span>Pesanan</button>
+  <button data-toast="Profil segera hadir"><span>👤</span>Profil</button>
+</nav>
+<div class="toast" id="toast" role="status"></div>
+</div>
+<script>
+(function(){
+var views=["mulai","beranda","peta","pesan"],tt;
+function toast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},2200)}
+function route(){
+  var h=(location.hash||"#mulai").slice(1);if(views.indexOf(h)<0)h="mulai";
+  views.forEach(function(v){document.getElementById("s-"+v).classList.toggle("on",v===h)});
+  document.getElementById("nav").classList.toggle("on",h==="beranda"||h==="peta");
+  document.querySelectorAll("nav button[data-go]").forEach(function(b){b.classList.toggle("act",b.dataset.go===h)});
+  window.scrollTo(0,0);
+}
+document.addEventListener("click",function(e){
+  var g=e.target.closest("[data-go]");if(g){location.hash=g.dataset.go;return}
+  var t=e.target.closest("[data-toast]");if(t){toast(t.dataset.toast);return}
+  var s=e.target.closest("[data-svc]");if(s){location.hash="pesan";var o=document.querySelectorAll("#opts .opt");o.forEach(function(x,i){x.classList.toggle("sel",i==s.dataset.svc)});return}
+  var o2=e.target.closest("#opts .opt");if(o2){document.querySelectorAll("#opts .opt").forEach(function(x){x.classList.remove("sel")});o2.classList.add("sel");return}
+  var p=e.target.closest("#pays .pay");if(p){document.querySelectorAll("#pays .pay").forEach(function(x){x.classList.remove("sel")});p.classList.add("sel");return}
+  if(e.target.id==="order"){toast("Pesanan terkirim! Budi segera menuju lokasi Anda.");setTimeout(function(){location.hash="beranda"},1800)}
+});
+window.addEventListener("hashchange",route);route();
+})();
+</script>
+</body>
+</html>
